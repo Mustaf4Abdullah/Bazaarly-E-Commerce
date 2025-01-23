@@ -1,0 +1,113 @@
+﻿@model Bazaarly.Models.Product
+
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6">
+            <h1 style="color: #c8a71f;">@Model.Name</h1>
+            <p style="color: black;">@Model.Description</p>
+            <p style="color: black;"><strong>Price:</strong> @Model.Price $</p>
+            <p style="color: black;"><strong>Stock:</strong> @Model.Stock</p>
+            <p style="color: black;"><strong>Category:</strong> @Model.Category</p>
+        </div>
+        <div class="col-md-6">
+            <h2 style="color: #c8a71f;">Images</h2>
+            <div>
+                @if (Model.Images != null && Model.Images.Any())
+                {
+                    foreach (var image in Model.Images)
+                    {
+                        <img src="@image.ImageUrl" alt="@Model.Name" style="max-width: 200px; margin: 5px; border: 2px solid #c8a71f;" />
+                    }
+                }
+                else
+                {
+                    <p style="color: black;">No images available for this product.</p>
+                }
+            </div>
+        </div>
+    </div>
+
+    <hr />
+    <h2 style="color: #c8a71f;">Comments</h2>
+
+    <div id="comments-section">
+        @if (Model.Comments != null && Model.Comments.Any())
+        {
+            foreach (var comment in Model.Comments)
+            {
+                <div class="comment-box" style="border: 1px solid #c8a71f; margin-bottom: 15px; padding: 10px;">
+                    <p style="color: black;"><strong>@comment.UserName</strong> said on @comment.DatePosted.ToShortDateString():</p>
+                    <p style="color: black;">@comment.Content</p>
+
+                    @* Check if the user is a manager *@
+                    @if (User.IsInRole("Manager"))
+                    {
+                        <form asp-controller="Product" asp-action="DeleteComment" asp-route-id="@comment.CommentId" method="post" style="display:inline;">
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        </form>
+                    }
+                </div>
+            }
+        }
+        else
+        {
+            <p style="color: black;">No comments yet.</p>
+        }
+    </div>
+
+    <h3 style="color: #c8a71f;">Add a Comment</h3>
+    <form asp-action="AddComment" method="post" id="commentForm">
+        <div class="form-group">
+            <label for="UserName" style="color: black;">Your Name</label>
+            <input type="text" name="UserName" class="form-control" style="border: 1px solid #c8a71f;" required />
+        </div>
+        <div class="form-group">
+            <label for="Content" style="color: black;">Comment</label>
+            <textarea name="Content" class="form-control" rows="4" style="border: 1px solid #c8a71f;" required></textarea>
+        </div>
+        <input type="hidden" name="ProductId" value="@Model.ProductId" />
+        <button type="submit" class="btn" style="background-color: #c8a71f; color: white;">Submit Comment</button>
+    </form>
+
+    <a href="@Url.Action("Dashboard", "Customer")" class="btn btn-secondary" style="background-color: #c8a71f; color: white;">Home</a>
+</div>
+<script>
+    $(document).ready(function () {
+        $("#commentForm").submit(function (e) {
+            e.preventDefault(); // Prevent default form submission
+
+            var formData = $(this).serialize();
+
+            $.ajax({
+                type: "POST",
+                url: "/Product/AddComment",
+                data: formData,
+                success: function (response) {
+                    if (response.success) {
+                        // Append the new comment to the comments section
+                        var newCommentHtml = `
+                                    <div class='comment-box' style='border: 1px solid #c8a71f; margin-bottom: 15px; padding: 10px;'>
+                                        <p style="color: black;"><strong>${response.comment.UserName}</strong> said on ${new Date(response.comment.DatePosted).toLocaleDateString()}:</p>
+                                        <p style="color: black;">${response.comment.Content}</p>
+                                    </div>`;
+                        $("#comments-section").append(newCommentHtml);
+
+                        // Clear the comment form
+                        $("#commentForm")[0].reset();
+                    } else {
+                        alert("Error adding comment: " + response.message);
+                    }
+                },
+                error: function () {
+                    alert("An error occurred.");
+                }
+            });
+        });
+    });
+</script>
+
+

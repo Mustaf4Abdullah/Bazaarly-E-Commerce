@@ -1,0 +1,46 @@
+﻿@model Bazaarly.Models.Product
+
+@{
+    ViewData["Title"] = "Delete Product";
+}
+<div class="container-fluid">
+    <div class="row align-items-center" style="height: 100vh;">
+        <!-- Left Section: Confirm Deletion -->
+        <div class="col-md-6 bg-white p-5">
+            <div class="text-center mb-5">
+                <img src="/images/login-logo.jpg" alt="Bazaarly Logo" class="mb-3" style="width: 200px;" />
+                <h2 class="font-weight-bold">Delete Product</h2>
+                <p class="text-muted">Confirm the deletion of the product</p>
+            </div>
+
+            <dl class="row">
+                <dt class="col-sm-3">Product Name</dt>
+                <dd class="col-sm-9">@Model.Name</dd>
+
+                <dt class="col-sm-3">Description</dt>
+                <dd class="col-sm-9">@Model.Description</dd>
+
+                <dt class="col-sm-3">Price</dt>
+                <dd class="col-sm-9">@Model.Price</dd>
+
+                <dt class="col-sm-3">Stock</dt>
+                <dd class="col-sm-9">@Model.Stock</dd>
+
+                <dt class="col-sm-3">Category</dt>
+                <dd class="col-sm-9">@Model.Category</dd>
+            </dl>
+
+            <form asp-action="DeleteConfirmed">
+                <input type="hidden" asp-for="ProductId" />
+                <button type="submit" class="btn btn-lg w-100 mb-3" style="background-color: #c8a71f; color: white;">Confirm Delete</button>
+                <a asp-action="ManageProducts" class="btn btn-lg w-100" style="background-color: #6c757d; color: white;">Cancel</a>
+            </form>
+        </div>
+
+        <!-- Right Section: Info Section -->
+        <div class="col-md-6 text-center d-flex flex-column justify-content-center" style="background-color: #c8a71f; color: white;">
+            <h2>Delete Product</h2>
+            <p>Ensure that you confirm the deletion before proceeding.</p>
+        </div>
+    </div>
+</div>

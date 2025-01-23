@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Bazaarly.Models.Product>
+
+@{
+    ViewData["Title"] = "Manage Products";
+}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="mb-4">Manage Products</h2>
+            <a asp-controller="Manager" asp-action="AddProduct" class="btn text-white" style="background-color: #c8a71f; float: right;">Add Product</a>
+        </div>
+    </div>
+
+    <table class="table table-striped mt-3">
+        <thead class="table-light">
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Stock</th>
+                <th>Category</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model)
+            {
+                <tr>
+                    <td>
+                        <a asp-controller="Product" asp-action="Details" asp-route-id="@product.ProductId">@product.Name</a>
+                    </td>
+                    <td>@product.Description</td>
+                    <td>@product.Price</td>
+                    <td>@product.Stock</td>
+                    <td>@product.Category</td>
+                    <td>
+                        <a asp-controller="Manager" asp-action="EditProduct" asp-route-id="@product.ProductId" class="btn btn-warning">Edit</a>
+                        <a asp-controller="Manager" asp-action="DeleteProduct" asp-route-id="@product.ProductId" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

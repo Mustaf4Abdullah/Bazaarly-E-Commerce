@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Bazaarly</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Bazaarly.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <!-- Header content goes here -->
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <!-- New contact us section -->
+    <footer class="footer">
+        <div class="container">
+            <p>Contact us: <strong>+123 456 7890</strong> | Email: <strong>info@Bazzarly.com</strong></p>
+            <p>
+                Follow us on social media:
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </p>
+            <div style=" text-align; right">
+                &copy; 2024 - Bazaarly - <a asp-controller="Home" asp-action="Privacy">Privacy</a>
+            </div>
+        
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

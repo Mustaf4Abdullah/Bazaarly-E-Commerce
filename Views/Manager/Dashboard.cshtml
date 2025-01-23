@@ -1,0 +1,40 @@
+﻿@{
+    ViewData["Title"] = "Manager Dashboard";
+}
+<div class="container-fluid">
+    <div class="row align-items-center" style="height: 100vh;">
+        <!-- Left Section: Dashboard -->
+        <div class="col-md-6 bg-white p-5">
+            <div class="text-center mb-5">
+                <img src="/images/login-logo.jpg" alt="Bazaarly Logo" class="mb-3" style="width: 200px;" />
+                <h2 class="font-weight-bold">Manager Dashboard</h2>
+                <p class="text-muted">Manage your tasks here</p>
+            </div>
+
+            <div>
+                <a asp-controller="Manager" asp-action="ManageProducts" class="btn btn-lg w-100 mb-3" style="background-color: #c8a71f; color: white;">Manage Products</a>
+            </div>
+            <div>
+                <a asp-controller="Manager" asp-action="ViewEmployees" class="btn btn-lg w-100 mb-3" style="background-color: #c8a71f; color: white;">View Employees</a>
+            </div>
+            <div>
+                <a asp-controller="Manager" asp-action="Messages" class="btn btn-lg w-100 mb-3" style="background-color: #c8a71f; color: white;">Messages and Reports</a>
+            </div>
+            <div>
+                <a asp-controller="Manager" asp-action="ViewUsers" class="btn btn-lg w-100 mb-3" style="background-color: #c8a71f; color: white;">View Users</a>
+            </div>
+            <div>
+                <a asp-controller="Manager" asp-action="ViewOrders" class="btn btn-lg w-100" style="background-color: #c8a71f; color: white;">View Orders</a>
+            </div>
+            <div>
+                <a href="@Url.Action("Dashboard", "Customer")" class="btn btn-secondary" style="background-color: #c8a71f; color: white;">Home</a>
+            </div>
+        </div>
+
+        <!-- Right Section: Info Section -->
+        <div class="col-md-6 text-center d-flex flex-column justify-content-center" style="background-color: #c8a71f; color: white;">
+            <h2>Welcome, Manager</h2>
+            <p>Explore your dashboard and manage the marketplace effectively.</p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,72 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<div class="container-fluid">
+    <div class="row align-items-center" style="height: 100vh;">
+        <!-- Left Section: Sign Up Form -->
+        <div class="col-md-6 bg-white p-5">
+            <div class="text-center mb-5">
+                <img src="/images/login-logo.jpg" alt="Bazaarly Logo" class="mb-3" style="width: 200px;" />
+                <h2 class="font-weight-bold">Create a New Account</h2>
+                <p class="text-muted">Sign up using social networks</p>
+
+                <!-- Social Media Sign Up Buttons -->
+                <div class="d-flex justify-content-center mb-4">
+                    <button class="btn btn-light me-2">
+                        <i class="fab fa-facebook-f"></i> <!-- Placeholder for Facebook -->
+                    </button>
+                    <button class="btn btn-light me-2">
+                        <i class="fab fa-google"></i> <!-- Placeholder for Google -->
+                    </button>
+                    <button class="btn btn-light">
+                        <i class="fab fa-linkedin-in"></i> <!-- Placeholder for LinkedIn -->
+                    </button>
+                </div>
+
+                <p class="text-muted">OR</p>
+            </div>
+
+            <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+
+                <!-- Email Input -->
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="Email" />
+                    <label asp-for="Input.Email">Email</label>
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+
+                <!-- Password Input -->
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Password" />
+                    <label asp-for="Input.Password">Password</label>
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                </div>
+
+                <!-- Confirm Password Input -->
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Confirm Password" />
+                    <label asp-for="Input.ConfirmPassword">Confirm Password</label>
+                    <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                </div>
+
+                <!-- Register Button -->
+                <button id="registerSubmit" type="submit" class="btn btn-lg w-100" style="background-color: #c8a71f; color: white;">Register</button>
+            </form>
+        </div>
+
+        <!-- Right Section: Login Suggestion -->
+        <div class="col-md-6 text-center d-flex flex-column justify-content-center" style="background-color: #c8a71f; color: white;">
+            <h2>Already have an account?</h2>
+            <p>Login and explore a great range of opportunities!</p>
+            <a asp-page="./Login" class="btn btn-lg btn-light">Login</a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

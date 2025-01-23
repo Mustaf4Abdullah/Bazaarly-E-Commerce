@@ -1,0 +1,42 @@
+﻿@model Bazaarly.Models.Order
+
+<h2 style="color:#c8a71f;">Order Details - Order ID: @Model.OrderId</h2>
+
+<div class="order-details">
+    <p><strong>Order Date:</strong> @Model.OrderDate.ToShortDateString()</p>
+    <p><strong>Shipping Address:</strong> @Model.Addresses.FullAddress</p>
+    <h3 style="color:black;">Order Items</h3>
+    <table class="table">
+        <thead style="background-color:#c8a71f; color:white;">
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.OrderItems)
+            {
+                <tr>
+                    <td>
+                        <a asp-controller="Product" asp-action="Details" asp-route-id="@item.Product.ProductId" style="color:black;">
+                            @item.Product.Name
+                        </a>
+                    </td>
+                    <td>@item.Quantity</td>
+                    <td>@(item.Product.Price * item.Quantity)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <h3 style="color:black;">Total Price:</h3>
+    <p>
+        @* Calculate total price of the order *@
+        @{
+            decimal totalPrice = Model.OrderItems.Sum(i => i.Product.Price * i.Quantity);
+        }
+        @totalPrice.ToString("C") <!-- Format as currency -->
+    </p>
+</div>
+
+<a href="@Url.Action("UsersAccount", "Customer")" class="btn btn-primary" style="background-color:#c8a71f;">Back to My Account</a>

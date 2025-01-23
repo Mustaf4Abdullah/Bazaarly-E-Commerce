@@ -1,0 +1,51 @@
+﻿@model Bazaarly.Models.Product
+
+@{
+    ViewData["Title"] = "Add Product";
+}
+<div class="container-fluid">
+    <div class="row align-items-center" style="height: 100vh;">
+        <!-- Left Section: Add Product Form -->
+        <div class="col-md-6 bg-white p-5">
+            <div class="text-center mb-5">
+                <img src="/images/login-logo.jpg" alt="Bazaarly Logo" class="mb-3" style="width: 200px;" />
+                <h2 class="font-weight-bold">Add New Product</h2>
+                <p class="text-muted">Fill in the product details</p>
+            </div>
+
+            <form asp-action="AddProduct" enctype="multipart/form-data">
+                <div class="form-floating mb-3">
+                    <input asp-for="Name" class="form-control" placeholder="Product Name" />
+                    <label asp-for="Name">Product Name</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Description" class="form-control" placeholder="Description" />
+                    <label asp-for="Description">Description</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Price" class="form-control" placeholder="Price" />
+                    <label asp-for="Price">Price</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Stock" class="form-control" placeholder="Stock" />
+                    <label asp-for="Stock">Stock</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Category" class="form-control" placeholder="Category" />
+                    <label asp-for="Category">Category</label>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="imageFile">Product Image</label>
+                    <input type="file" name="imageFile" accept="image/*" class="form-control-file" />
+                </div>
+                <button type="submit" class="btn btn-lg w-100" style="background-color: #c8a71f; color: white;">Add Product</button>
+            </form>
+        </div>
+
+        <!-- Right Section: Info Section -->
+        <div class="col-md-6 text-center d-flex flex-column justify-content-center" style="background-color: #c8a71f; color: white;">
+            <h2>Product Management</h2>
+            <p>Easily add new products to your marketplace.</p>
+        </div>
+    </div>
+</div>

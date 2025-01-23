@@ -1,0 +1,38 @@
+﻿@page
+@model Bazaarly.Areas.Identity.Pages.Account.LogoutModel
+
+@{
+    ViewData["Title"] = "Log out";
+}
+
+<div class="container-fluid">
+    <div class="row align-items-center" style="height: 100vh;">
+        <!-- Left Section: Logout Message -->
+        <div class="col-md-6 bg-white p-5">
+            <div class="text-center mb-5">
+                <img src="/images/login-logo.jpg" alt="Bazaarly Logo" class="mb-3" style="width: 200px;" />
+                <h2 class="font-weight-bold">Log Out of Your Account</h2>
+                <p class="text-muted">You have successfully logged out of the application.</p>
+
+                <!-- Redirect Button -->
+                <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home")" method="post" class="mt-4">
+                    <button type="submit" class="btn btn-lg w-100" style="background-color: #c8a71f; color: white;">Log Out</button>
+                </form>
+
+                <p class="mt-4 text-muted">Want to log back in?</p>
+                <a asp-page="./Login" class="btn btn-outline-secondary">Log In</a>
+            </div>
+        </div>
+
+        <!-- Right Section: Sign Up Suggestion -->
+        <div class="col-md-6 text-center d-flex flex-column justify-content-center" style="background-color: #c8a71f; color: white;">
+            <h2>New Here?</h2>
+            <p>Sign up and discover a great amount of new opportunities!</p>
+            <a asp-page="./Register" class="btn btn-lg btn-light">Sign Up</a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

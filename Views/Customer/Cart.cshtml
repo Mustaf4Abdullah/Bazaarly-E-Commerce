@@ -1,0 +1,44 @@
+﻿@model IEnumerable<CartItem>
+
+<div class="container mt-5">
+    <h2 class="mb-4" style="color: #c8a71f;">Your Cart</h2>
+
+    <table class="table table-hover">
+        <thead style="background-color: #c8a71f; color: white;">
+            <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr style="color: black;">
+                    <td>
+                        <a asp-controller="Product" asp-action="Details" asp-route-id="@item.Product.ProductId" style="color: #c8a71f;">
+                            @item.Product.Name
+                        </a>
+                    </td>
+                    <td>@item.Product.Price $</td>
+                    <td>1</td>
+                    <td>
+                        <form asp-action="RemoveFromCart" asp-controller="Customer" method="post">
+                            <input type="hidden" name="cartItemId" value="@item.Id" />
+                            <button type="submit" class="btn btn-outline-danger" style="color: #c8a71f; border-color: #c8a71f;">Remove</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <p class="lead" style="color: black;"><strong>Total:</strong> @Model.Sum(i => i.Product.Price) $</p>
+
+    <div class="d-flex justify-content-between">
+        <a href="@Url.Action("Checkout", "Customer")" class="btn btn-success" style="background-color: #c8a71f; color: white;">Buy</a>
+        <a href="@Url.Action("Dashboard", "Customer")" class="btn btn-secondary" style="background-color: #c8a71f; color: white;">Home</a>
+    </div>
+
+</div>

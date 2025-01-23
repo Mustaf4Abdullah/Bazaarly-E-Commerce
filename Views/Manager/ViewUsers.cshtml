@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Microsoft.AspNetCore.Identity.IdentityUser>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml"; // Ensure you're using the main layout for consistency
+}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col text-center mb-4">
+            <h1 class="mb-4" style="color: #c8a71f;">Users</h1>
+            <p class="lead" style="color: black;">Manage your users efficiently.</p>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card shadow-sm" style="border-color: #c8a71f;">
+                <div class="card-body" style="background-color: white;">
+                    <table class="table table-hover">
+                        <thead style="background-color: #c8a71f; color: white;">
+                            <tr>
+                                <th>User ID</th>
+                                <th>User Name</th>
+                                <th>Email</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var user in Model)
+                            {
+                                <tr>
+                                    <td>@user.Id</td>
+                                    <td>@user.UserName</td>
+                                    <td>@user.Email</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a href="@Url.Action("Dashboard", "Manager")" class="btn btn-secondary" style="background-color: #c8a71f; color: white;">Back to Dashboard</a>
+</div>

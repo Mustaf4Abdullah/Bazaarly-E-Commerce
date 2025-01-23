@@ -1,0 +1,53 @@
+﻿@model CheckoutViewModel
+
+<h2 style="color:#c8a71f;">Checkout</h2>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+
+<h3 style="color:black;">Your Cart Items</h3>
+<table class="table">
+    <thead style="background-color:#c8a71f; color:white;">
+        <tr>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Quantity</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.CartItems)
+        {
+            <tr>
+                <td>
+                    <a asp-controller="Product" asp-action="Details" asp-route-id="@item.Product.ProductId" style="color:black;">
+                        @item.Product.Name
+                    </a>
+                </td>
+                <td>@item.Product.Price</td>
+                <td>@item.Quantity</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h3 style="color:black;">Select Address</h3>
+<form asp-action="PlaceOrder" method="post">
+    <select name="selectedAddressId" required style="border-color:#c8a71f;">
+        @foreach (var address in Model.Addresses)
+        {
+            <option value="@address.AddressId">@address.FullAddress</option>
+        }
+    </select>
+    <button type="submit" class="btn btn-success" style="background-color:#c8a71f;">Confirm Order</button>
+</form>

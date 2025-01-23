@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Bazaarly.Models.Favorites>
+
+<h2 style="color:#c8a71f;">Your Favorites</h2>
+
+@if (!Model.Any())
+{
+    <p>No favorites added yet.</p>
+}
+else
+{
+    <table class="table">
+        <thead style="background-color:#c8a71f; color:white;">
+            <tr>
+                <th>Product Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var favorite in Model)
+            {
+                <tr>
+                    <td>
+                        <a asp-controller="Product" asp-action="Details" asp-route-id="@favorite.Product.ProductId" style="color:black;">
+                            @favorite.Product.Name
+                        </a>
+                    </td>
+                    <td>@favorite.Product.Description</td>
+                    <td>@favorite.Product.Price $</td>
+                    <td>
+                        <form asp-action="RemoveFromFavorites" asp-controller="Customer" method="post">
+                            <input type="hidden" name="favoriteId" value="@favorite.FavoritesId" />
+                            <button type="submit" class="btn btn-danger">Remove</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+    <a href="@Url.Action("Dashboard", "Customer")" class="btn btn-secondary" style="background-color: #c8a71f; color: white;">Home</a>
+}

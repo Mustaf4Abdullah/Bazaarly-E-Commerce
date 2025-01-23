@@ -1,0 +1,37 @@
+/* Only keeping layout-related styles here */
+
+/* Navbar brand alignment */
+a.navbar-brand[b-wfoehzpvy4] {
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
+}
+
+/* Buttons (use .btn-primary if needed elsewhere) */
+.btn-primary[b-wfoehzpvy4] {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+
+/* Active state for nav pills */
+.nav-pills .nav-link.active[b-wfoehzpvy4],
+.nav-pills .show > .nav-link[b-wfoehzpvy4] {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+
+/* Borders for top and bottom elements */
+.border-top[b-wfoehzpvy4] {
+    border-top: 1px solid #e5e5e5;
+}
+
+.border-bottom[b-wfoehzpvy4] {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+/* Shadow for specific box elements */
+.box-shadow[b-wfoehzpvy4] {
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}

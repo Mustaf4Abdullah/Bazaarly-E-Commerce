@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Bazaarly.Models.Order>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml"; // Ensure you're using the main layout for consistency
+}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col text-center mb-4">
+            <h1 class="mb-4" style="color: #c8a71f;">Orders</h1>
+            <p class="lead" style="color: black;">Manage and view customer orders.</p>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card shadow-sm" style="border-color: #c8a71f;">
+                <div class="card-body" style="background-color: white;">
+                    <table class="table table-hover">
+                        <thead style="background-color: #c8a71f; color: white;">
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Customer Name</th>
+                                <th>Order Date</th>
+                                <th>Addresses</th>
+                                <th>Status</th>
+                                <th>Total Amount</th>
+                                <th>Order Items</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var order in Model)
+                            {
+                                <tr>
+                                    <td>@order.OrderId</td>
+                                    <td>@order.CustomerName</td>
+                                    <td>@order.OrderDate.ToString("g")</td>
+                                    <td>@order.Addresses?.ToString() ?? "N/A"</td>
+                                    <td>@order.Status</td>
+                                    <td>@order.TotalAmount.ToString("C")</td>
+                                    <td>
+                                        <ul>
+                                            @foreach (var item in order.OrderItems)
+                                            {
+                                                <li>@item.Product.Name - Quantity: @item.Quantity</li>
+                                            }
+                                        </ul>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a href="@Url.Action("Dashboard", "Manager")" class="btn btn-secondary" style="background-color: #c8a71f; color: white;">Back to Dashboard</a>
+</div>

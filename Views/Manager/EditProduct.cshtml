@@ -1,0 +1,61 @@
+﻿@model Bazaarly.Models.Product
+
+@{
+    ViewData["Title"] = "Edit Product - " + Model.Name;
+}
+
+<div class="container mt-5">
+    <h1 style="color: #c8a71f;">Edit @Model.Name</h1>
+
+    <form asp-action="EditProduct" enctype="multipart/form-data">
+        <input type="hidden" asp-for="ProductId" />
+
+        <!-- Product Fields -->
+        <div class="form-group">
+            <label asp-for="Name" style="color: black;">Product Name</label>
+            <input asp-for="Name" class="form-control" style="border: 1px solid #c8a71f;" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Description" style="color: black;">Description</label>
+            <textarea asp-for="Description" class="form-control" style="border: 1px solid #c8a71f;"></textarea>
+        </div>
+        <div class="form-group">
+            <label asp-for="Price" style="color: black;">Price</label>
+            <input asp-for="Price" class="form-control" style="border: 1px solid #c8a71f;" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Stock" style="color: black;">Stock</label>
+            <input asp-for="Stock" class="form-control" style="border: 1px solid #c8a71f;" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Category" style="color: black;">Category</label>
+            <input asp-for="Category" class="form-control" style="border: 1px solid #c8a71f;" />
+        </div>
+
+        <!-- Image Upload Section -->
+        <div class="form-group">
+            <label style="color: black;">Upload New Images</label>
+            <input type="file" name="images" multiple class="form-control" style="border: 1px solid #c8a71f;" />
+        </div>
+
+        <!-- Existing Images Section -->
+        <div class="form-group">
+            <label style="color: black;">Existing Images</label>
+            <div>
+                @if (Model.Images != null && Model.Images.Any())
+                {
+                    foreach (var image in Model.Images)
+                    {
+                        <img src="@image.ImageUrl" alt="@Model.Name" style="max-width: 200px; margin: 5px; border: 2px solid #c8a71f;" />
+                    }
+                }
+                else
+                {
+                    <p style="color: black;">No images available for this product.</p>
+                }
+            </div>
+        </div>
+
+        <button type="submit" class="btn" style="background-color: #c8a71f; color: white;">Update Product</button>
+    </form>
+</div>

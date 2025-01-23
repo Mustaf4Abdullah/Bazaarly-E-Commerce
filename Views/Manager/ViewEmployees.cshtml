@@ -1,0 +1,22 @@
+﻿@model IEnumerable<Bazaarly.Models.Employee>
+
+@{
+    ViewData["Title"] = "Employees";
+}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Employees</h2>
+            <ul class="list-group mt-3">
+                @foreach (var employee in Model)
+                {
+                    <li class="list-group-item">
+                        <strong>@employee.FullName</strong> - @employee.Email
+                    </li>
+                }
+            </ul>
+            <a asp-action="AddEmployee" class="btn text-white mt-3" style="background-color: #c8a71f;">Add New Employee</a>
+        </div>
+    </div>
+</div>
